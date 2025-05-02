@@ -3,6 +3,10 @@ from .models import Person
 
 # Create your views here.
 def home(request):
+    if request.method == "POST":
+        contactName = request.POST['contactName']
+        contactNumber = request.POST['contactNumber']
+        Person.objects.create(name=contactName, contactNumber=contactNumber)
     persons = Person.objects.all()
     context = {
         "persons": persons
