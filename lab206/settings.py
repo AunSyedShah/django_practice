@@ -80,6 +80,16 @@ DATABASES = {
     }
 }
 
+# DATABASES = {
+#     "default": {
+#         "ENGINE": "django.db.backends.mysql",
+#         "NAME": "if0_38821092_django",
+#         "USER": 'if0_38821092',
+#         "PASSWORD": 'aptech112233',
+#         "HOST": "sql211.infinityfree.com"
+#     }
+# }
+
 
 # Password validation
 # https://docs.djangoproject.com/en/5.2/ref/settings/#auth-password-validators

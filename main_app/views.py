@@ -1,4 +1,7 @@
 from django.shortcuts import render
+from django.http import JsonResponse
+from django.core import serializers
+
 from .models import Person
 
 # Create your views here.
@@ -14,3 +17,8 @@ def home(request):
 
 def contact(request):
     return render(request, "contact.html")
+
+def get_all_persons(request):
+    persons = Person.objects.all()
+    persons_json = serializers.serialize('json', persons)
+    return JsonResponse(data=persons_json, safe=False)
