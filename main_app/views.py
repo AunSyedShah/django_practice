@@ -1,6 +1,7 @@
 from django.shortcuts import render
 from django.http import JsonResponse
 from django.core import serializers
+import json
 
 from .models import Person
 
@@ -20,5 +21,6 @@ def contact(request):
 
 def get_all_persons(request):
     persons = Person.objects.all()
-    persons_json = serializers.serialize('json', persons)
-    return JsonResponse(data=persons_json, safe=False)
+    data = serializers.serialize("json", persons) # json like string
+    data = json.loads(data)
+    return JsonResponse(data=data, safe=False)
