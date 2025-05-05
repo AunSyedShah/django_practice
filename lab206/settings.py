@@ -25,7 +25,7 @@ SECRET_KEY = "django-insecure-gpymp&+n46#%9^-+u+1(fnl4005u^1qq&j&x4sf&cvl*33(x8j
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = ["*"]
 
 
 # Application definition

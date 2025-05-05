@@ -20,7 +20,10 @@ def contact(request):
     return render(request, "contact.html")
 
 def get_all_persons(request):
+    persons_list = []
     persons = Person.objects.all()
     data = serializers.serialize("json", persons) # json like string
     data = json.loads(data)
-    return JsonResponse(data=data, safe=False)
+    for i in data:
+        persons_list.append(i["fields"])
+    return JsonResponse(data=persons_list, safe=False)
