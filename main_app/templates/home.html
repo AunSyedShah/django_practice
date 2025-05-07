@@ -13,10 +13,7 @@
     <div class="container">
         <form method="post">
             {% csrf_token %}
-            <label for="contactName">Contact Name</label>
-            <input type="text" name="contactName" id="contactName">
-            <label for="contactName">Contact Number</label>
-            <input type="text" name="contactNumber" id="contactNumber">
+            {{ form }}
             <input type="submit" value="Add Student">
         </form>
         <table class="table">
@@ -25,6 +22,8 @@
                     <th scope="col">#</th>
                     <th scope="col">Contact Name</th>
                     <th scope="col">Contact Number</th>
+                    <th scope="col">Address</th>
+                    <th scope="col">Blood Group</th>
                 </tr>
             </thead>
             <tbody>
@@ -33,6 +32,8 @@
                     <th scope="row">{{person.id}}</th>
                     <td>{{person.name}}</td>
                     <td>{{person.contactNumber}}</td>
+                    <td>{{person.address}}</td>
+                    <td>{{person.blood_group}}</td>
                 </tr>
                 {% endfor %}
             </tbody>
