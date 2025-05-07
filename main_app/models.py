@@ -6,6 +6,8 @@ class Person(models.Model):
     contactNumber = models.CharField(max_length=20, verbose_name="Contact Number", default='None')
     address = models.TextField(default='')
     blood_group = models.CharField(max_length=20, null=True)
+    age = models.IntegerField(default=0)
+    dob = models.DateField(null=True, blank=True, verbose_name="D.O.B")
 
     def __str__(self):
         return self.name
