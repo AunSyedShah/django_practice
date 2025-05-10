@@ -24,6 +24,7 @@
                     <th scope="col">Contact Number</th>
                     <th scope="col">Address</th>
                     <th scope="col">Blood Group</th>
+                    <td>Delete</td>
                 </tr>
             </thead>
             <tbody>
@@ -34,6 +35,7 @@
                     <td>{{person.contactNumber}}</td>
                     <td>{{person.address}}</td>
                     <td>{{person.blood_group}}</td>
+                    <td><button class="btn btn-danger">Delete</button></td>
                 </tr>
                 {% endfor %}
             </tbody>

@@ -1,4 +1,4 @@
-from django.shortcuts import render
+from django.shortcuts import render, redirect
 from django.http import JsonResponse
 from django.core import serializers
 import json
@@ -29,3 +29,8 @@ def get_all_persons(request):
     for i in data:
         persons_list.append(i["fields"])
     return JsonResponse(data=persons_list, safe=False)
+
+
+def delete_person(request, id):
+    Person.objects.get(id=id).delete()
+    return redirect("/")
