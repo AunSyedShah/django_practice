@@ -2,9 +2,13 @@ from django.shortcuts import render, redirect
 from django.http import JsonResponse
 from django.core import serializers
 import json
+from django.core.signing import Signer
 
 from .models import Person
 from .forms import PersonModelForm
+
+
+signer = Signer()
 
 # Create your views here.
 def home(request):
@@ -14,7 +18,11 @@ def home(request):
         if form.is_valid():
             form.save()
     persons = Person.objects.all()
-    context['persons'] = persons
+    signed_person = []
+    for person in persons:
+        person.encrypted_id = signer.sign(person.id)
+        signed_person.append(person)
+    context['persons'] = signed_person
     context['form'] = PersonModelForm()
     return render(request, "home.html", context)
 
@@ -32,5 +40,6 @@ def get_all_persons(request):
 
 
 def delete_person(request, id):
+    id = signer.unsign(id)
     Person.objects.get(id=id).delete()
     return redirect("/")

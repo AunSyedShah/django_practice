@@ -19,7 +19,7 @@
         <table class="table">
             <thead>
                 <tr>
-                    <th scope="col">#</th>
+                    <!-- <th scope="col">#</th> -->
                     <th scope="col">Contact Name</th>
                     <th scope="col">Contact Number</th>
                     <th scope="col">Address</th>
@@ -30,12 +30,12 @@
             <tbody>
                 {% for person in persons %}
                 <tr>
-                    <th scope="row">{{person.id}}</th>
+                    <!-- <th scope="row">{{person.encrypted_id}}</th> -->
                     <td>{{person.name}}</td>
                     <td>{{person.contactNumber}}</td>
                     <td>{{person.address}}</td>
                     <td>{{person.blood_group}}</td>
-                    <td><button class="btn btn-danger">Delete</button></td>
+                    <td><a class="btn btn-danger" href="delete_person/{{person.encrypted_id}}" role="button">Delete</a></td>
                 </tr>
                 {% endfor %}
             </tbody>
