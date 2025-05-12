@@ -6,7 +6,6 @@ class PersonModelForm(forms.ModelForm):
         model = Person
         fields = '__all__'
 
-    
 
-    name = forms.CharField(widget=forms.TextInput(attrs={'class':'form-control'}))
+    name = forms.CharField(widget=forms.TextInput(attrs={'class':'form-control w-25', 'placeholder':"Shabi Naqvi"}))
     dob = forms.DateField(widget=forms.DateInput(attrs={'class':'form-control', 'type': 'date'}), required=False)

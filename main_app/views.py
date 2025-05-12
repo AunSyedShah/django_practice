@@ -43,3 +43,18 @@ def delete_person(request, id):
     id = signer.unsign(id)
     Person.objects.get(id=id).delete()
     return redirect("/")
+
+
+def update_person(request, id):
+    person_id = signer.unsign(id)
+    person = Person.objects.get(pk=person_id)
+
+    if request.method == "POST":
+        form = PersonModelForm(request.POST, instance=person)
+        if form.is_valid():
+            form.save()
+            return redirect("/")
+    else:
+        form = PersonModelForm(instance=person)
+
+    return render(request, "update_person.html", {"form": form})
