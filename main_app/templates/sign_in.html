@@ -4,6 +4,11 @@
 
 {% block content %}
 <h1>Sign In</h1>
+{% if errors %}
+<div class="alert alert-danger" role="alert">
+  {{errors.invalid_login}}
+</div>
+{% endif %}
 <form method="post">
 {% csrf_token %}
 <div class="mb-3">

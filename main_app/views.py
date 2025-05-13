@@ -7,6 +7,7 @@ from django.core.signing import Signer
 from .models import Person
 from .forms import PersonModelForm, MyAuthenticationForm
 from django.contrib.auth.forms import AuthenticationForm
+from django.contrib import messages
 
 
 signer = Signer()
@@ -63,5 +64,12 @@ def update_person(request, id):
 
 def sign_in(request):
     context = {}
+    if request.method == "POST":
+        form = MyAuthenticationForm(request, data=request.POST)
+        if form.is_valid():
+            print("form valid")
+        else:
+            print(form.error_messages)
+            context['errors'] = form.error_messages
     context["form"] = MyAuthenticationForm()
     return render(request, "sign_in.html", context)
