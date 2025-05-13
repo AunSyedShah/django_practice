@@ -6,6 +6,7 @@ from django.core.signing import Signer
 
 from .models import Person
 from .forms import PersonModelForm
+from django.contrib.auth.forms import AuthenticationForm
 
 
 signer = Signer()
@@ -58,3 +59,9 @@ def update_person(request, id):
         form = PersonModelForm(instance=person)
 
     return render(request, "update_person.html", {"form": form})
+
+
+def sign_in(request):
+    context = {}
+    context["form"] = AuthenticationForm()
+    return render(request, "sign_in.html", context)
