@@ -5,7 +5,7 @@ import json
 from django.core.signing import Signer
 
 from .models import Person
-from .forms import PersonModelForm
+from .forms import PersonModelForm, MyAuthenticationForm
 from django.contrib.auth.forms import AuthenticationForm
 
 
@@ -63,5 +63,5 @@ def update_person(request, id):
 
 def sign_in(request):
     context = {}
-    context["form"] = AuthenticationForm()
+    context["form"] = MyAuthenticationForm()
     return render(request, "sign_in.html", context)
