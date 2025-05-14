@@ -1,6 +1,6 @@
 from django import forms
 from .models import Person
-from django.contrib.auth.forms import AuthenticationForm
+from django.contrib.auth.forms import AuthenticationForm, UserCreationForm
 
 class PersonModelForm(forms.ModelForm):
     class Meta:
@@ -15,3 +15,10 @@ class PersonModelForm(forms.ModelForm):
 class MyAuthenticationForm(AuthenticationForm):
     username = forms.CharField(widget=forms.TextInput(attrs={'class': 'form-control'}))
     password = forms.CharField(widget=forms.PasswordInput(attrs={'class': 'form-control'}))
+
+
+class MyUserCreationForm(UserCreationForm):
+    def __init__(self, *args, **kwargs):
+        super(MyUserCreationForm, self).__init__(*args, **kwargs)
+        for field in self.fields.values():
+            field.widget.attrs['class'] = 'form-control'

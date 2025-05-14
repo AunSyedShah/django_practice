@@ -5,8 +5,8 @@ import json
 from django.core.signing import Signer
 
 from .models import Person
-from .forms import PersonModelForm, MyAuthenticationForm
-from django.contrib.auth.forms import AuthenticationForm
+from .forms import PersonModelForm, MyAuthenticationForm, MyUserCreationForm
+from django.contrib.auth.forms import AuthenticationForm, UserCreationForm
 from django.contrib import messages
 
 
@@ -73,3 +73,16 @@ def sign_in(request):
             context['errors'] = form.error_messages
     context["form"] = MyAuthenticationForm()
     return render(request, "sign_in.html", context)
+
+
+def sign_up(request):
+    context = {}
+    if request.method == "POST":
+        form = MyUserCreationForm(data=request.POST)
+        if form.is_valid():
+            form.save()
+        else:
+            pass
+    form = MyUserCreationForm()
+    context['form'] = form
+    return render(request, "sign_up.html", context)
