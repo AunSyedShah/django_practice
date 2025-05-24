@@ -8,10 +8,13 @@ from .models import Person
 from .forms import PersonModelForm, MyAuthenticationForm, MyUserCreationForm
 from django.contrib.auth.forms import AuthenticationForm, UserCreationForm
 from django.contrib import messages
+from django.contrib.auth import authenticate, login, logout
+from django.contrib.auth.decorators import login_required
 
 
 signer = Signer()
 
+@login_required
 # Create your views here.
 def home(request):
     context = {}
@@ -64,10 +67,15 @@ def update_person(request, id):
 
 def sign_in(request):
     context = {}
+    if request.user.is_authenticated:
+        return redirect("home")
     if request.method == "POST":
         form = MyAuthenticationForm(request, data=request.POST)
         if form.is_valid():
-            print("form valid")
+            username = form.cleaned_data['username']
+            password = form.cleaned_data['password']
+            user = authenticate(request, username=username, password=password)
+            login(request, user)
         else:
             print(form.error_messages)
             context['errors'] = form.error_messages
